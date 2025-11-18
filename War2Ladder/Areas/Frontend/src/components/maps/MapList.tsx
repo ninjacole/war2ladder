@@ -1,4 +1,6 @@
 // MapList.tsx
+import { saveAs } from "file-saver";
+import JSZip from "jszip";
 import { useEffect, useState } from "react";
 import '../../styles/maps.css'; // adjusted path
 import { Pagination } from "./Pagination";
@@ -52,10 +54,28 @@ export const MapList: React.FC = () => {
         });
     };
 
-    const handleDownload = () => {
-        // For now, just log selected maps
-        console.log("Downloading maps:", Array.from(selected));
-        // Later: implement actual bulk download (e.g., zip)
+
+
+    // ...
+
+    const handleDownload = async () => {
+        if (selected.size === 0) return;
+
+        const zip = new JSZip();
+
+        // Add each selected file to the zip
+        for (const mapName of selected) {
+            const map = maps.find(m => m.name === mapName);
+            if (!map) continue;
+
+            const response = await fetch(map.url);
+            const blob = await response.blob();
+            zip.file(map.name, blob);
+        }
+
+        // Generate zip and trigger download
+        const content = await zip.generateAsync({ type: "blob" });
+        saveAs(content, "selected-maps.zip");
     };
 
     return (
