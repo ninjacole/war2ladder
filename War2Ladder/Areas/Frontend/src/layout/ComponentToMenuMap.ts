@@ -1,8 +1,10 @@
+import { MapList } from "../components/maps/MapList";
 import { Welcome } from "../components/Welcome";
 
 
 export const ComponentToMenuMap: Record<string, React.FC> = {
     welcome: Welcome,
+    maps: MapList,
     // 'players-list': PlayersList,
     // 'players-stats': PlayersStats,
     // 'players-search': PlayersSearch,

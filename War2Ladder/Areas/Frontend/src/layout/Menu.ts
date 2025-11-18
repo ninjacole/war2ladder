@@ -9,6 +9,7 @@ export const MENU: IMenuNodeProps[] = [
             { id: 'ladder-rules', label: 'Rules', href: '#' }
         ]
     },
+    { id: 'maps', label: 'Maps' },
     {
         id: 'events',
         label: 'Events',

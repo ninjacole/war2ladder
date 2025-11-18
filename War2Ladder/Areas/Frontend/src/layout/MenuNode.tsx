@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface IMenuNodeProps {
     id: string;
@@ -6,21 +6,31 @@ export interface IMenuNodeProps {
     href?: string;
     children?: IMenuNodeProps[];
     onClick?: (id: string) => void;
+    selected: string;
 };
 
-export const MenuNode = (props: IMenuNodeProps) => {
-    const { id, label, href, children, onClick } = props;
+export const MenuNode: React.FC<IMenuNodeProps> = (props: IMenuNodeProps) => {
+    const { id, label, href, children, onClick, selected } = props;
     const [openMap, setOpenMap] = useState<Record<string, boolean>>({});
 
     const hasChildren = Array.isArray(children) && children.length > 0;
-    const isOpen = !!openMap[id];
+    const isSelected = selected === id;
+    const hasSelectedChild = children?.some(child => child.id === selected);
+
+    const isOpen = isSelected || hasSelectedChild || !!openMap[id];
 
     const handleToggle = (id: string) => {
         setOpenMap(prev => ({ ...prev, [id]: !prev[id] }));
         onClick && onClick(id);
     };
 
-    return <div key={id} className="menu-entry">
+    useEffect(() => {
+        if (isSelected || hasSelectedChild) {
+            setOpenMap(prev => ({ ...prev, [id]: !prev[id] }));
+        }
+    })
+
+    return <div key={id} className="menu-entry ${isSelected ? 'active' : ''}">
         {hasChildren ? <>
             <button
                 type="button"
