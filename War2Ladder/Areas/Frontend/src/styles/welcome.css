@@ -5,5 +5,21 @@
     text-transform: none;
     font-style: normal;
     text-decoration: none;
-    background-repeat: no-repeat;
+    background-size: stretch;
+}
+
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+.blueorc-image {
+    width: 100%;
+    height: auto;
+    display: block;
 }

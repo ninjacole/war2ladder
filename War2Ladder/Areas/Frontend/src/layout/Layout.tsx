@@ -20,7 +20,7 @@ const Layout = (props: ILayoutProps) => {
             <a className="logo-link" href="/" aria-label="Go to main page">
                 <img src='/static/logo.jpg' alt="War2Ladder" className="logo-img" />
             </a>
-            <div className="logo">Warcraft 2 Sharkfights!</div>
+
             <nav className="menu" aria-label="Main menu">
                 {MENU.map(node => (
                     <MenuNode
@@ -39,7 +39,7 @@ const Layout = (props: ILayoutProps) => {
             <header className="banner">
                 <div className="banner-content">
                     <h2></h2>
-                    <p className="banner-sub">Quick status or announcement area</p>
+                    <div className="logo">Warcraft 2 Sharkfights!</div>
                 </div>
             </header>
 

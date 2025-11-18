@@ -33,12 +33,6 @@ body,
     border-right: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-.logo {
-    color: var(--accent);
-    font-weight: 700;
-    font-size: 1.1rem;
-}
-
 .menu {
     display: flex;
     flex-direction: column;
@@ -73,6 +67,7 @@ body,
     align-items: center;
     background: linear-gradient(90deg, rgba(59, 130, 246, 0.06), transparent);
     border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    justify-content: center;
 }
 
 .banner-content h2 {
@@ -80,15 +75,8 @@ body,
     font-size: 1.05rem;
 }
 
-.banner-sub {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.85rem;
-}
-
 /* Content */
 .content {
     padding: 1.5rem;
     overflow: auto;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), transparent);
 }
