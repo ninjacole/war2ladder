@@ -31,23 +31,23 @@ export const MapList: React.FC<MapListProps> = ({ onFocusMap }) => {
             setIsLoading(true);
             try {
                 const res = await fetch("/maps/manifest.json");
-                const manifest: { id: number; name: string; filename: string; path: string }[] = await res.json();
+                const manifest: { id: number; name: string; filename: string; path: string; size: number }[] = await res.json();
 
-                const enriched: PudMapItem[] = await Promise.all(
-                    manifest.map(async (entry) => {
-                        try {
-                            // URL encode the path for fetching
-                            const encodedPath = entry.path.split('/').map((part, index) => 
-                                index === 0 || part === '' ? part : encodeURIComponent(part)
-                            ).join('/');
-                            const head = await fetch(encodedPath, { method: "HEAD" });
-                            const size = parseInt(head.headers.get("Content-Length") || "0", 10);
-                            return { id: entry.id, name: entry.name, filename: entry.filename, size, url: encodedPath };
-                        } catch {
-                            return { id: entry.id, name: entry.name, filename: entry.filename, size: 0, url: entry.path };
-                        }
-                    })
-                );
+                // Create map items directly from manifest - no HEAD requests needed
+                const enriched: PudMapItem[] = manifest.map((entry) => {
+                    // URL encode the path for when it's actually needed
+                    const encodedPath = entry.path.split('/').map((part, index) =>
+                        index === 0 || part === '' ? part : encodeURIComponent(part)
+                    ).join('/');
+                    
+                    return {
+                        id: entry.id,
+                        name: entry.name,
+                        filename: entry.filename,
+                        size: entry.size || 0,
+                        url: encodedPath
+                    };
+                });
 
                 setMaps(enriched);
             } catch (error) {

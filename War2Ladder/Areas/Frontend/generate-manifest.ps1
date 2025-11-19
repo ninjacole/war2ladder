@@ -16,6 +16,7 @@ foreach ($file in $files) {
         name     = $file.Name           # Display name
         filename = $file.Name           # Original filename for downloads
         path     = "/maps/$($file.Name)" # Original file URL (will be URL encoded by client)
+        size     = $file.Length         # File size in bytes
     }
     $id++
 }
