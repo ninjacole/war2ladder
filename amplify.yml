@@ -11,10 +11,13 @@ frontend:
         - npm run build
     postBuild:
       commands:
-        - ls -la War2Ladder/Areas/Frontend/
+        - pwd
+        - ls -la
+        - ls -la War2Ladder/Areas/Frontend/ || echo "Frontend dir not found"
         - |
           if [ -d "War2Ladder/Areas/Frontend/public" ]; then
-            cp -r War2Ladder/Areas/Frontend/public/* War2Ladder/Areas/Frontend/dist/ || true
+            echo "Copying public files..."
+            cp -r War2Ladder/Areas/Frontend/public/* War2Ladder/Areas/Frontend/dist/ || echo "Copy failed"
           else
             echo "Public directory not found"
           fi
