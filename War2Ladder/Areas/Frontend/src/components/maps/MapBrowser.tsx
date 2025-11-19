@@ -8,10 +8,13 @@ export const MapBrowser: React.FC = () => {
 
     const handleFocusMap = async (item: PudMapItem) => {
         try {
+            console.log("Attempting to load map:", item.name);
+            console.log("URL:", item.url);
             const pudArrayBuffer = await fetchAndParsePud(item.url);
             setPud(pudArrayBuffer);
         } catch (err) {
-            console.error("Failed to load map:", err);
+            console.error("Failed to load map:", item.name, err);
+            console.error("Failed URL:", item.url);
             setPud(null);
         }
     };
