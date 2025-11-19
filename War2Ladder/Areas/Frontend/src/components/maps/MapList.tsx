@@ -7,7 +7,9 @@ import { Pagination } from "./Pagination";
 import { Toolbar } from "./Toolbar";
 
 export interface PudMapItem {
+    id: number;
     name: string;
+    filename: string; // original filename for downloads
     size: number; // bytes
     url: string;  // public URL for download/fetch
 }
@@ -29,16 +31,16 @@ export const MapList: React.FC<MapListProps> = ({ onFocusMap }) => {
             setIsLoading(true);
             try {
                 const res = await fetch("/maps/manifest.json");
-                const manifest: { name: string; path: string }[] = await res.json();
+                const manifest: { id: number; name: string; filename: string; path: string }[] = await res.json();
 
                 const enriched: PudMapItem[] = await Promise.all(
                     manifest.map(async (entry) => {
                         try {
                             const head = await fetch(entry.path, { method: "HEAD" });
                             const size = parseInt(head.headers.get("Content-Length") || "0", 10);
-                            return { name: entry.name, size, url: entry.path };
+                            return { id: entry.id, name: entry.name, filename: entry.filename, size, url: entry.path };
                         } catch {
-                            return { name: entry.name, size: 0, url: entry.path };
+                            return { id: entry.id, name: entry.name, filename: entry.filename, size: 0, url: entry.path };
                         }
                     })
                 );
@@ -100,7 +102,8 @@ export const MapList: React.FC<MapListProps> = ({ onFocusMap }) => {
             const response = await fetch(map.url);
 
             const blob = await response.blob();
-            zip.file(map.name, blob);
+            // Use original filename for the zip entry
+            zip.file(map.filename, blob);
         }
 
         // Generate zip and trigger download
