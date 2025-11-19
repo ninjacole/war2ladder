@@ -1,11 +1,11 @@
-# Generate manifest.json for all .pud files in a folder using ID-based approach
+# Generate manifest.json for all .pud files with client-side blob renaming approach
 # Save this as generate-manifest.ps1 and run it from PowerShell
 
 $mapFolder = "C:\projects\War2Ladder\War2Ladder\Areas\Frontend\public\maps"
 $outputFile = Join-Path $mapFolder "manifest.json"
 
-# Get all PUD files (excluding safe copies and manifest)
-$files = Get-ChildItem -Path $mapFolder -Filter *.pud | Where-Object { -not $_.Name.StartsWith('_') }
+# Get all PUD files
+$files = Get-ChildItem -Path $mapFolder -Filter *.pud | Sort-Object Name
 
 $manifest = @()
 $id = 1
@@ -13,9 +13,9 @@ $id = 1
 foreach ($file in $files) {
     $manifest += [PSCustomObject]@{
         id       = $id
-        name     = $file.Name
-        filename = $file.Name  # Original filename for downloads
-        path     = "/maps/$id.pud"  # ID-based URL
+        name     = $file.Name           # Display name
+        filename = $file.Name           # Original filename for downloads
+        path     = "/maps/$($file.Name)" # Original file URL (will be URL encoded by client)
     }
     $id++
 }

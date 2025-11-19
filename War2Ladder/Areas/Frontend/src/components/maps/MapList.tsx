@@ -36,9 +36,13 @@ export const MapList: React.FC<MapListProps> = ({ onFocusMap }) => {
                 const enriched: PudMapItem[] = await Promise.all(
                     manifest.map(async (entry) => {
                         try {
-                            const head = await fetch(entry.path, { method: "HEAD" });
+                            // URL encode the path for fetching
+                            const encodedPath = entry.path.split('/').map((part, index) => 
+                                index === 0 || part === '' ? part : encodeURIComponent(part)
+                            ).join('/');
+                            const head = await fetch(encodedPath, { method: "HEAD" });
                             const size = parseInt(head.headers.get("Content-Length") || "0", 10);
-                            return { id: entry.id, name: entry.name, filename: entry.filename, size, url: entry.path };
+                            return { id: entry.id, name: entry.name, filename: entry.filename, size, url: encodedPath };
                         } catch {
                             return { id: entry.id, name: entry.name, filename: entry.filename, size: 0, url: entry.path };
                         }

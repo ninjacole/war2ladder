@@ -1,0 +1,23 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build
+    postBuild:
+      commands:
+        - echo "Generating manifest..."
+        - powershell -ExecutionPolicy Bypass -File generate-manifest.ps1
+        - echo "Copying public files to dist..."
+        - cp -r public/* dist/ || true
+        - echo "Build complete"
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
