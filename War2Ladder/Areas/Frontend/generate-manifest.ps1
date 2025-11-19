@@ -12,10 +12,10 @@ $id = 1
 
 foreach ($file in $files) {
     $manifest += [PSCustomObject]@{
-        id = $id
-        name = $file.Name
+        id       = $id
+        name     = $file.Name
         filename = $file.Name  # Original filename for downloads
-        path = "/maps/$id.pud"  # ID-based URL
+        path     = "/maps/$id.pud"  # ID-based URL
     }
     $id++
 }
