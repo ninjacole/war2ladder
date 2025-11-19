@@ -21,22 +21,34 @@ export const MapList: React.FC<MapListProps> = ({ onFocusMap }) => {
     const [selected, setSelected] = useState<Set<string>>(new Set());
     const [page, setPage] = useState(0);
     const [filterText, setFilterText] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
     const pageSize = 20;
 
     useEffect(() => {
         async function loadMaps() {
-            const res = await fetch("/maps/manifest.json");
-            const manifest: { name: string; path: string }[] = await res.json();
+            setIsLoading(true);
+            try {
+                const res = await fetch("/maps/manifest.json");
+                const manifest: { name: string; path: string }[] = await res.json();
 
-            const enriched: PudMapItem[] = await Promise.all(
-                manifest.map(async (entry) => {
-                    const head = await fetch(entry.path, { method: "HEAD" });
-                    const size = parseInt(head.headers.get("Content-Length") || "0", 10);
-                    return { name: entry.name, size, url: entry.path };
-                })
-            );
+                const enriched: PudMapItem[] = await Promise.all(
+                    manifest.map(async (entry) => {
+                        try {
+                            const head = await fetch(entry.path, { method: "HEAD" });
+                            const size = parseInt(head.headers.get("Content-Length") || "0", 10);
+                            return { name: entry.name, size, url: entry.path };
+                        } catch {
+                            return { name: entry.name, size: 0, url: entry.path };
+                        }
+                    })
+                );
 
-            setMaps(enriched);
+                setMaps(enriched);
+            } catch (error) {
+                console.error('Failed to load maps:', error);
+            } finally {
+                setIsLoading(false);
+            }
         }
 
         loadMaps();
@@ -95,6 +107,21 @@ export const MapList: React.FC<MapListProps> = ({ onFocusMap }) => {
         const content = await zip.generateAsync({ type: "blob" });
         saveAs(content, "selected-maps.zip");
     };
+
+    // Reset page when filter changes
+    useEffect(() => {
+        setPage(0);
+    }, [filterText]);
+
+    if (isLoading) {
+        return (
+            <div className='table-container'>
+                <div style={{ textAlign: 'center', padding: '40px' }}>
+                    <div>Loading maps...</div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className='table-container'>
