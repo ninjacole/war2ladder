@@ -11,7 +11,13 @@ frontend:
         - npm run build
     postBuild:
       commands:
-        - cp -r War2Ladder/Areas/Frontend/public/* War2Ladder/Areas/Frontend/dist/
+        - ls -la War2Ladder/Areas/Frontend/
+        - |
+          if [ -d "War2Ladder/Areas/Frontend/public" ]; then
+            cp -r War2Ladder/Areas/Frontend/public/* War2Ladder/Areas/Frontend/dist/ || true
+          else
+            echo "Public directory not found"
+          fi
   artifacts:
     baseDirectory: War2Ladder/Areas/Frontend/dist
     files:
