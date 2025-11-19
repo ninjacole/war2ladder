@@ -1,0 +1,25 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - cd War2Ladder/Areas/Frontend
+        - rm -rf node_modules package-lock.json
+        - npm install
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: War2Ladder/Areas/Frontend/dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - War2Ladder/Areas/Frontend/node_modules/**/*
+customHeaders:
+  - pattern: '**/*.pud'
+    headers:
+      - key: 'Content-Type'
+        value: 'application/octet-stream'
+      - key: 'Cache-Control'
+        value: 'public, max-age=31536000'
