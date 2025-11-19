@@ -12,12 +12,16 @@ export interface PudMapItem {
     url: string;  // public URL for download/fetch
 }
 
-export const MapList: React.FC = () => {
+export interface MapListProps {
+    onFocusMap?: (item: PudMapItem) => void;
+}
+
+export const MapList: React.FC<MapListProps> = ({ onFocusMap }) => {
     const [maps, setMaps] = useState<PudMapItem[]>([]);
     const [selected, setSelected] = useState<Set<string>>(new Set());
     const [page, setPage] = useState(0);
     const [filterText, setFilterText] = useState("");
-    const pageSize = 25;
+    const pageSize = 20;
 
     useEffect(() => {
         async function loadMaps() {
@@ -46,17 +50,30 @@ export const MapList: React.FC = () => {
     const start = page * pageSize;
     const current = filteredMaps.slice(start, start + pageSize);
 
+
     const toggleSelect = (mapName: string) => {
         setSelected(prev => {
             const newSet = new Set(prev);
-            newSet.has(mapName) ? newSet.delete(mapName) : newSet.add(mapName);
+
+            if (newSet.has(mapName)) {
+                newSet.delete(mapName);
+                // If you want to clear preview when deselecting the focused map:
+                if (onFocusMap) {
+                    const stillSelected = maps.find(m => newSet.has(m.name)) || null;
+                    if (stillSelected) {
+                        onFocusMap(stillSelected);
+                    }
+                }
+            } else {
+                newSet.add(mapName);
+                // Notify parent with the newly selected map
+                const map = maps.find(m => m.name === mapName) || null;
+                if (map && onFocusMap) onFocusMap(map);
+            }
+
             return newSet;
         });
     };
-
-
-
-    // ...
 
     const handleDownload = async () => {
         if (selected.size === 0) return;
@@ -69,6 +86,7 @@ export const MapList: React.FC = () => {
             if (!map) continue;
 
             const response = await fetch(map.url);
+
             const blob = await response.blob();
             zip.file(map.name, blob);
         }
@@ -109,12 +127,11 @@ export const MapList: React.FC = () => {
                 </thead>
                 <tbody>
                     {current.map((map) => (
-                        <tr key={map.name}>
+                        <tr key={map.name} onClick={() => toggleSelect(map.name)}>
                             <td style={{ border: "1px solid #eee", padding: "8px", textAlign: "center" }}>
                                 <input
                                     type="checkbox"
                                     checked={selected.has(map.name)}
-                                    onChange={() => toggleSelect(map.name)}
                                 />
                             </td>
                             <td style={{ border: "1px solid #eee", padding: "8px" }}>{map.name}</td>
