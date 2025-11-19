@@ -1,0 +1,7 @@
+/maps/*.pud
+  Content-Type: application/octet-stream
+  Cache-Control: public, max-age=31536000
+
+/*.pud
+  Content-Type: application/octet-stream
+  Cache-Control: public, max-age=31536000

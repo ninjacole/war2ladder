@@ -132,6 +132,11 @@ class PudParser {
             const header = this.readBuffer(12);
             const expectedHeader = new TextEncoder().encode("WAR2 MAP\0\0");
 
+            // Debug logging
+            console.log('Header bytes:', Array.from(header).map(b => b.toString(16).padStart(2, '0')).join(' '));
+            console.log('Header as string:', new TextDecoder().decode(header));
+            console.log('Expected bytes:', Array.from(expectedHeader).map(b => b.toString(16).padStart(2, '0')).join(' '));
+
             for (let i = 0; i < 10; i++) {
                 if (header[i] !== expectedHeader[i]) {
                     throw new Error("Invalid PUD file - not a WAR2 MAP");
