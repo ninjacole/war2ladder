@@ -9,17 +9,13 @@ frontend:
     build:
       commands:
         - npm run build
+    postBuild:
+      commands:
+        - cp -r War2Ladder/Areas/Frontend/public/* War2Ladder/Areas/Frontend/dist/
   artifacts:
     baseDirectory: War2Ladder/Areas/Frontend/dist
     files:
       - '**/*'
-    name: myApp
-  cache:
-    paths:
-      - War2Ladder/Areas/Frontend/node_modules/**/*
-  postBuild:
-    commands:
-      - cp -r War2Ladder/Areas/Frontend/public/* War2Ladder/Areas/Frontend/dist/
   cache:
     paths:
       - War2Ladder/Areas/Frontend/node_modules/**/*
