@@ -15,13 +15,9 @@ const ERA_MAP: Record<number, string> = {
 };
 
 export async function fetchAndParsePud(url: string): Promise<ArrayBuffer> {
-    // URL encode the path to handle special characters
-    const encodedUrl = url.split('/').map((part, index) =>
-        index === 0 || part === '' ? part : encodeURIComponent(part)
-    ).join('/');
-    console.log('Original URL:', url);
-    console.log('Encoded URL:', encodedUrl);
-    const res = await fetch(encodedUrl);
+    // URL is already encoded by MapList, just use it directly
+    console.log('Fetching URL:', url);
+    const res = await fetch(url);
     return res.arrayBuffer();
 }
 
