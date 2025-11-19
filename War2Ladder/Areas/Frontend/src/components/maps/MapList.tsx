@@ -39,7 +39,7 @@ export const MapList: React.FC<MapListProps> = ({ onFocusMap }) => {
                     const encodedPath = entry.path.split('/').map((part, index) =>
                         index === 0 || part === '' ? part : encodeURIComponent(part)
                     ).join('/');
-                    
+
                     return {
                         id: entry.id,
                         name: entry.name,
