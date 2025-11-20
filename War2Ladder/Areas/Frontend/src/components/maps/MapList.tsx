@@ -32,7 +32,7 @@ export const MapList: React.FC<MapListProps> = ({ onFocusMap }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [sortField, setSortField] = useState<SortField>('name');
     const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
-    const pageSize = 20;
+    const pageSize = 12;
 
     useEffect(() => {
         async function loadMaps() {
@@ -217,147 +217,153 @@ export const MapList: React.FC<MapListProps> = ({ onFocusMap }) => {
 
     return (
         <div className='table-container'>
-            <Toolbar
-                filterText={filterText}
-                onFilterChange={setFilterText}
-                playerFilter={playerFilter}
-                onPlayerFilterChange={setPlayerFilter}
-            />
+            <div className="table-header">
+                <Toolbar
+                    filterText={filterText}
+                    onFilterChange={setFilterText}
+                    playerFilter={playerFilter}
+                    onPlayerFilterChange={setPlayerFilter}
+                />
 
-            <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '12px 16px',
-                backgroundColor: '#2d2d30',
-                borderBottom: '1px solid #3c3c3c'
-            }}>
-                <span style={{ fontSize: '14px', color: '#cccccc', fontWeight: '400' }}>
-                    {selected.size} of {filteredMaps.length} selected
-                </span>
-                <button
-                    onClick={handleDownload}
-                    disabled={selected.size === 0}
-                    style={{
-                        padding: '8px 16px',
-                        backgroundColor: selected.size > 0 ? '#007acc' : '#6e6e6e',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '4px',
-                        cursor: selected.size > 0 ? 'pointer' : 'not-allowed',
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        transition: 'background-color 0.2s ease',
-                        boxShadow: selected.size > 0 ? '0 2px 4px rgba(0,122,204,0.3)' : 'none'
-                    }}
-                    onMouseEnter={(e) => {
-                        const target = e.target as HTMLButtonElement;
-                        if (selected.size > 0) {
-                            target.style.backgroundColor = '#005a9e';
-                        }
-                    }}
-                    onMouseLeave={(e) => {
-                        const target = e.target as HTMLButtonElement;
-                        if (selected.size > 0) {
-                            target.style.backgroundColor = '#007acc';
-                        }
-                    }}
-                >
-                    ⬇ Download ({selected.size})
-                </button>
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '12px 16px',
+                    backgroundColor: '#2d2d30',
+                    borderBottom: '1px solid #3c3c3c'
+                }}>
+                    <span style={{ fontSize: '14px', color: '#cccccc', fontWeight: '400' }}>
+                        {selected.size} of {filteredMaps.length} selected
+                    </span>
+                    <button
+                        onClick={handleDownload}
+                        disabled={selected.size === 0}
+                        style={{
+                            padding: '8px 16px',
+                            backgroundColor: selected.size > 0 ? '#007acc' : '#6e6e6e',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            cursor: selected.size > 0 ? 'pointer' : 'not-allowed',
+                            fontSize: '14px',
+                            fontWeight: '600',
+                            transition: 'background-color 0.2s ease',
+                            boxShadow: selected.size > 0 ? '0 2px 4px rgba(0,122,204,0.3)' : 'none'
+                        }}
+                        onMouseEnter={(e) => {
+                            const target = e.target as HTMLButtonElement;
+                            if (selected.size > 0) {
+                                target.style.backgroundColor = '#005a9e';
+                            }
+                        }}
+                        onMouseLeave={(e) => {
+                            const target = e.target as HTMLButtonElement;
+                            if (selected.size > 0) {
+                                target.style.backgroundColor = '#007acc';
+                            }
+                        }}
+                    >
+                        ⬇ Download ({selected.size})
+                    </button>
+                </div>
             </div>
 
-            <table className='map-table-tbody' style={{ borderCollapse: "collapse", width: "100%" }}>
-                <thead>
-                    <tr>
-                        <th style={{
-                            border: "1px solid #3c3c3c",
-                            padding: "12px 8px",
-                            textAlign: "center",
-                            backgroundColor: "#252526",
-                            width: "50px"
-                        }}>
-                            <input
-                                type="checkbox"
-                                checked={selected.size === filteredMaps.length && filteredMaps.length > 0}
-                                onChange={() => {
-                                    if (selected.size === filteredMaps.length) {
-                                        setSelected(new Set());
-                                    } else {
-                                        setSelected(new Set(filteredMaps.map(m => m.name)));
-                                    }
-                                }}
-                                style={{ accentColor: '#0078d4' }}
-                            />
-                        </th>
-                        <th style={getHeaderStyle('name')} onClick={() => handleSort('name')}>
-                            Name{getSortIcon('name')}
-                        </th>
-                        <th style={getHeaderStyle('players')} onClick={() => handleSort('players')}>
-                            Players{getSortIcon('players')}
-                        </th>
-                        <th style={getHeaderStyle('dimensions')} onClick={() => handleSort('dimensions')}>
-                            Dimensions{getSortIcon('dimensions')}
-                        </th>
-                        <th style={getHeaderStyle('size')} onClick={() => handleSort('size')}>
-                            Size (KB){getSortIcon('size')}
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {current.map((map) => (
-                        <tr key={map.name} onClick={() => toggleSelect(map.name)}>
-                            <td style={{
+            <div className="table-content">
+                <table className='map-table-tbody' style={{ borderCollapse: "collapse", width: "100%" }}>
+                    <thead>
+                        <tr>
+                            <th style={{
                                 border: "1px solid #3c3c3c",
                                 padding: "12px 8px",
                                 textAlign: "center",
-                                backgroundColor: "#1e1e1e"
+                                backgroundColor: "#252526",
+                                width: "50px"
                             }}>
                                 <input
                                     type="checkbox"
-                                    checked={selected.has(map.name)}
-                                    style={{ accentColor: '#007acc' }}
+                                    checked={selected.size === filteredMaps.length && filteredMaps.length > 0}
+                                    onChange={() => {
+                                        if (selected.size === filteredMaps.length) {
+                                            setSelected(new Set());
+                                        } else {
+                                            setSelected(new Set(filteredMaps.map(m => m.name)));
+                                        }
+                                    }}
+                                    style={{ accentColor: '#0078d4' }}
                                 />
-                            </td>
-                            <td style={{
-                                border: "1px solid #3c3c3c",
-                                padding: "12px 8px",
-                                backgroundColor: "#1e1e1e",
-                                color: "#cccccc"
-                            }}>{map.name}</td>
-                            <td style={{
-                                border: "1px solid #3c3c3c",
-                                padding: "12px 8px",
-                                textAlign: "center",
-                                backgroundColor: "#1e1e1e",
-                                color: "#cccccc"
-                            }}>
-                                {map.players || '-'}
-                            </td>
-                            <td style={{
-                                border: "1px solid #3c3c3c",
-                                padding: "12px 8px",
-                                textAlign: "center",
-                                backgroundColor: "#1e1e1e",
-                                color: "#cccccc"
-                            }}>
-                                {map.dimensions || '-'}
-                            </td>
-                            <td style={{
-                                border: "1px solid #3c3c3c",
-                                padding: "12px 8px",
-                                textAlign: "center",
-                                backgroundColor: "#1e1e1e",
-                                color: "#cccccc"
-                            }}>
-                                {(map.size / 1024).toFixed(2)}
-                            </td>
+                            </th>
+                            <th style={getHeaderStyle('name')} onClick={() => handleSort('name')}>
+                                Name{getSortIcon('name')}
+                            </th>
+                            <th style={getHeaderStyle('players')} onClick={() => handleSort('players')}>
+                                Players{getSortIcon('players')}
+                            </th>
+                            <th style={getHeaderStyle('dimensions')} onClick={() => handleSort('dimensions')}>
+                                Dimensions{getSortIcon('dimensions')}
+                            </th>
+                            <th style={getHeaderStyle('size')} onClick={() => handleSort('size')}>
+                                Size (KB){getSortIcon('size')}
+                            </th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {current.map((map) => (
+                            <tr key={map.name} onClick={() => toggleSelect(map.name)}>
+                                <td style={{
+                                    border: "1px solid #3c3c3c",
+                                    padding: "12px 8px",
+                                    textAlign: "center",
+                                    backgroundColor: "#1e1e1e"
+                                }}>
+                                    <input
+                                        type="checkbox"
+                                        checked={selected.has(map.name)}
+                                        style={{ accentColor: '#007acc' }}
+                                    />
+                                </td>
+                                <td style={{
+                                    border: "1px solid #3c3c3c",
+                                    padding: "12px 8px",
+                                    backgroundColor: "#1e1e1e",
+                                    color: "#cccccc"
+                                }}>{map.name}</td>
+                                <td style={{
+                                    border: "1px solid #3c3c3c",
+                                    padding: "12px 8px",
+                                    textAlign: "center",
+                                    backgroundColor: "#1e1e1e",
+                                    color: "#cccccc"
+                                }}>
+                                    {map.players || '-'}
+                                </td>
+                                <td style={{
+                                    border: "1px solid #3c3c3c",
+                                    padding: "12px 8px",
+                                    textAlign: "center",
+                                    backgroundColor: "#1e1e1e",
+                                    color: "#cccccc"
+                                }}>
+                                    {map.dimensions || '-'}
+                                </td>
+                                <td style={{
+                                    border: "1px solid #3c3c3c",
+                                    padding: "12px 8px",
+                                    textAlign: "center",
+                                    backgroundColor: "#1e1e1e",
+                                    color: "#cccccc"
+                                }}>
+                                    {(map.size / 1024).toFixed(2)}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
 
-            <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+            <div className="table-footer">
+                <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+            </div>
         </div>
     );
 };
