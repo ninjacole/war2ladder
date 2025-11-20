@@ -33,19 +33,14 @@ export const MapList: React.FC<MapListProps> = ({ onFocusMap }) => {
                 const res = await fetch("/maps/manifest.json");
                 const manifest: { id: number; name: string; filename: string; path: string; size: number }[] = await res.json();
 
-                // Create map items directly from manifest - no HEAD requests needed
+                // Create map items directly from manifest - S3 URLs don't need encoding
                 const enriched: PudMapItem[] = manifest.map((entry) => {
-                    // URL encode the path for when it's actually needed
-                    const encodedPath = entry.path.split('/').map((part, index) =>
-                        index === 0 || part === '' ? part : encodeURIComponent(part)
-                    ).join('/');
-
                     return {
                         id: entry.id,
                         name: entry.name,
                         filename: entry.filename,
                         size: entry.size || 0,
-                        url: encodedPath
+                        url: entry.path // S3 URL used directly
                     };
                 });
 

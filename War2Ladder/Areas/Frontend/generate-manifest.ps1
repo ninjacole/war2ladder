@@ -1,8 +1,11 @@
-# Generate manifest.json for all .pud files with client-side blob renaming approach
+# Generate manifest.json for S3-hosted PUD files
 # Save this as generate-manifest.ps1 and run it from PowerShell
 
 $mapFolder = "C:\projects\War2Ladder\War2Ladder\Areas\Frontend\public\maps"
 $outputFile = Join-Path $mapFolder "manifest.json"
+
+# S3 bucket configuration - UPDATE THIS WITH YOUR ACTUAL BUCKET NAME
+$s3BucketUrl = "https://war2ladder-maps.s3.amazonaws.com"
 
 # Get all PUD files
 $files = Get-ChildItem -Path $mapFolder -Filter *.pud | Sort-Object Name
@@ -15,7 +18,7 @@ foreach ($file in $files) {
         id       = $id
         name     = $file.Name           # Display name
         filename = $file.Name           # Original filename for downloads
-        path     = "/maps/$($file.Name)" # Original file URL (will be URL encoded by client)
+        path     = "$s3BucketUrl/$($file.Name)" # S3 URL - no URL encoding needed for S3
         size     = $file.Length         # File size in bytes
     }
     $id++

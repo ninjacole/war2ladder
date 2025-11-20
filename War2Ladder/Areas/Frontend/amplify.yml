@@ -9,30 +9,10 @@ frontend:
         - npm run build
     postBuild:
       commands:
-        - echo "Copying public files to dist..."
-        - cp -r public/* dist/ || true
-        - echo "Checking if maps directory exists in dist..."
-        - ls -la dist/maps/ || echo "Maps directory not found in dist"
-        - echo "Counting PUD files in dist/maps..."
-        - find dist/maps/ -name "*.pud" | wc -l || echo "No PUD files found"
-        - echo "Generating manifest using Node.js..."
-        - node -e "
-          const fs = require('fs');
-          const path = require('path');
-          const mapsDir = 'dist/maps';
-          if (!fs.existsSync(mapsDir)) { console.log('Maps directory does not exist'); process.exit(1); }
-          const files = fs.readdirSync(mapsDir).filter(f => f.endsWith('.pud')).sort();
-          const manifest = files.map((file, index) => ({
-            id: index + 1,
-            name: file,
-            filename: file,
-            path: '/maps/' + file,
-            size: fs.statSync(path.join(mapsDir, file)).size
-          }));
-          fs.writeFileSync(path.join(mapsDir, 'manifest.json'), JSON.stringify(manifest, null, 2));
-          console.log('Manifest written with', manifest.length, 'entries');
-        "
-        - echo "Build complete"
+        - echo "Copying manifest.json to dist..."
+        - mkdir -p dist/maps
+        - cp public/maps/manifest.json dist/maps/ || echo "No manifest.json found"
+        - echo "S3-based build complete - no map files to copy"
   artifacts:
     baseDirectory: dist
     files:
