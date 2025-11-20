@@ -5,7 +5,7 @@ $mapFolder = "C:\projects\War2Ladder\War2Ladder\Areas\Frontend\public\maps"
 $outputFile = Join-Path $mapFolder "manifest.json"
 
 # S3 bucket configuration - UPDATE THIS WITH YOUR ACTUAL BUCKET NAME
-$s3BucketUrl = "https://war2ladder-maps.s3.amazonaws.com"
+$s3BucketUrl = "https://war2ladder-maps.s3.us-east-1.amazonaws.com"
 
 # Get all PUD files
 $files = Get-ChildItem -Path $mapFolder -Filter *.pud | Sort-Object Name
