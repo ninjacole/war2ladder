@@ -5,17 +5,40 @@ import PudRenderer from "./PudRenderer";
 
 export const MapBrowser: React.FC = () => {
     const [pud, setPud] = useState<ArrayBuffer | null>(null);
+    const [currentMapId, setCurrentMapId] = useState<number | null>(null);
+    const [pudCache, setPudCache] = useState<Map<number, ArrayBuffer>>(new Map());
 
-    const handleFocusMap = async (item: PudMapItem) => {
-        try {
-            console.log("Attempting to load map:", item.name);
-            console.log("URL:", item.url);
-            const pudArrayBuffer = await fetchAndParsePud(item.url);
-            setPud(pudArrayBuffer);
-        } catch (err) {
-            console.error("Failed to load map:", item.name, err);
-            console.error("Failed URL:", item.url);
+    const handleFocusMap = async (item: PudMapItem | null) => {
+        if (!item) {
+            // Clear preview when no map is selected
             setPud(null);
+            setCurrentMapId(null);
+            return;
+        }
+
+        // If we're already showing this map, don't refetch
+        if (currentMapId === item.id) {
+            return;
+        }
+
+        // Check cache first
+        const cached = pudCache.get(item.id);
+        if (cached) {
+            setPud(cached);
+            setCurrentMapId(item.id);
+            return;
+        }
+
+        try {
+            const pudArrayBuffer = await fetchAndParsePud(item.url);
+
+            // Cache the result
+            setPudCache(prev => new Map(prev).set(item.id, pudArrayBuffer));
+            setPud(pudArrayBuffer);
+            setCurrentMapId(item.id);
+        } catch (err) {
+            setPud(null);
+            setCurrentMapId(null);
         }
     };
 
@@ -25,7 +48,21 @@ export const MapBrowser: React.FC = () => {
                 <MapList onFocusMap={handleFocusMap} />
             </div>
             <div className="pud-renderer-container">
-                <PudRenderer pudArrayBuffer={pud} />
+                {pud ? (
+                    <PudRenderer pudArrayBuffer={pud} />
+                ) : (
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: '300px',
+                        color: '#666',
+                        fontStyle: 'italic',
+                        textAlign: 'center'
+                    }}>
+                        Click a map in the table to show a preview
+                    </div>
+                )}
             </div>
         </div>
     );

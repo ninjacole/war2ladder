@@ -15,7 +15,7 @@ export interface PudMapItem {
 }
 
 export interface MapListProps {
-    onFocusMap?: (item: PudMapItem) => void;
+    onFocusMap?: (item: PudMapItem | null) => void;
 }
 
 export const MapList: React.FC<MapListProps> = ({ onFocusMap }) => {
@@ -70,12 +70,9 @@ export const MapList: React.FC<MapListProps> = ({ onFocusMap }) => {
 
             if (newSet.has(mapName)) {
                 newSet.delete(mapName);
-                // If you want to clear preview when deselecting the focused map:
+                // Clear preview when deselecting - pass null to indicate no selection
                 if (onFocusMap) {
-                    const stillSelected = maps.find(m => newSet.has(m.name)) || null;
-                    if (stillSelected) {
-                        onFocusMap(stillSelected);
-                    }
+                    onFocusMap(null as any);
                 }
             } else {
                 newSet.add(mapName);
