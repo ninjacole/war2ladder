@@ -56,7 +56,7 @@ export const MapBrowser: React.FC = () => {
                         alignItems: 'center',
                         justifyContent: 'center',
                         height: '300px',
-                        color: '#666',
+                        color: '#cccccc',
                         fontStyle: 'italic',
                         textAlign: 'center'
                     }}>

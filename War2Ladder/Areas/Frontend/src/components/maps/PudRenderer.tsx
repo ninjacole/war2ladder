@@ -576,56 +576,14 @@ const PudRenderer: React.FC<PudRendererProps> = ({
                         <canvas ref={canvasRef} style={styles.canvas} />
                     </div>
 
-                    {mapStats && (
-                        <div style={styles.infoPanel}>
-                            <h3>Map Information</h3>
-                            <div style={styles.infoRow}>
-                                <span>Description:</span>
-                                <span>{mapStats.description}</span>
-                            </div>
-                            <div style={styles.infoRow}>
-                                <span>Era:</span>
-                                <span>{mapStats.era}</span>
-                            </div>
-                            <div style={styles.infoRow}>
-                                <span>Dimensions:</span>
-                                <span>{mapStats.dimensions}</span>
-                            </div>
-                            <div style={styles.infoRow}>
-                                <span>Version:</span>
-                                <span>{mapStats.version}</span>
-                            </div>
-                            <div style={styles.infoRow}>
-                                <span>Total Units:</span>
-                                <span>{mapStats.totalUnits}</span>
-                            </div>
-                            <div style={styles.infoRow}>
-                                <span>Gold Mines:</span>
-                                <span>{mapStats.goldMines}</span>
-                            </div>
-                            <div style={styles.infoRow}>
-                                <span>Oil Patches:</span>
-                                <span>{mapStats.oilPatches}</span>
-                            </div>
-                            <div style={styles.infoRow}>
-                                <span>Start Locations:</span>
-                                <span>{mapStats.startLocations}</span>
-                            </div>
-                            <div style={styles.infoRow}>
-                                <span>Tag:</span>
-                                <span>{mapStats.tag}</span>
-                            </div>
-
-                            <div style={styles.exportButtons}>
-                                <button style={styles.button} onClick={exportPng}>
-                                    Export as PNG
-                                </button>
-                                <button style={styles.button} onClick={exportJpeg}>
-                                    Export as JPEG
-                                </button>
-                            </div>
-                        </div>
-                    )}
+                    <div style={styles.exportButtons}>
+                        <button style={styles.button} onClick={exportPng}>
+                            Export as PNG
+                        </button>
+                        <button style={styles.button} onClick={exportJpeg}>
+                            Export as JPEG
+                        </button>
+                    </div>
                 </>
             )}
         </div>
