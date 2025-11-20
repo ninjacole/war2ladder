@@ -1,0 +1,92 @@
+.preview-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    color: #cccccc;
+    font-style: italic;
+    text-align: center;
+}
+
+/* PudRenderer component styles */
+.pud-renderer-container {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pud-renderer-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.pud-renderer-control-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.pud-renderer-label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.pud-renderer-input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.pud-renderer-canvas-container {
+    border: 1px solid #ccc;
+    display: inline-block;
+    max-width: 100%;
+    overflow: auto;
+    margin-bottom: 20px;
+}
+
+.pud-renderer-canvas {
+    border: none;
+    image-rendering: pixelated;
+}
+
+.pud-renderer-info-panel {
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.pud-renderer-info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.pud-renderer-export-buttons {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.pud-renderer-button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.pud-renderer-button:hover {
+    background-color: #0056b3;
+}
+
+.pud-renderer-error {
+    color: red;
+    font-weight: bold;
+    margin: 10px 0;
+}

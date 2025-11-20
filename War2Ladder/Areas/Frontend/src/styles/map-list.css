@@ -1,0 +1,169 @@
+/* Table responsiveness */
+@media (max-width: 1200px) {
+    .table-container {
+        height: auto;
+    }
+}
+
+.table-container {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.table-header {
+    flex: none;
+    /* Fixed size - doesn't grow or shrink */
+}
+
+.table-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.table-content table {
+    flex: none;
+    /* Don't force table to grow */
+    width: 100%;
+}
+
+.table-footer {
+    flex: none;
+    /* Fixed size - doesn't grow or shrink */
+}
+
+/* Dark theme table styling */
+.map-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1b1a19;
+    /* Neutral Dark */
+    color: #ffffff;
+}
+
+.map-table-th,
+.map-table-td {
+    padding: 8px 12px;
+    border: 1px solid #3b3a39;
+    /* Neutral Secondary Dark */
+    text-align: left;
+}
+
+/* Alternate row colors */
+.map-table-tbody tr:nth-child(odd) {
+    background-color: #252423;
+    /* Neutral Darker */
+}
+
+.map-table-tbody tr:nth-child(even) {
+    background-color: #323130;
+    /* Neutral Dark */
+}
+
+/* Hover effect */
+.map-table-tbody tr:hover {
+    background-color: #484644;
+    /* Neutral Dark Hover */
+}
+
+/* Table cell styles */
+.map-table-cell {
+    border: 1px solid #3c3c3c;
+    padding: 12px 8px;
+    background-color: #1e1e1e;
+    color: #cccccc;
+}
+
+.map-table-cell-center {
+    text-align: center;
+}
+
+.map-table-cell-checkbox {
+    border: 1px solid #3c3c3c;
+    padding: 12px 8px;
+    text-align: center;
+    background-color: #1e1e1e;
+}
+
+/* Checkbox styling */
+.map-checkbox {
+    accent-color: #007acc;
+}
+
+.header-checkbox {
+    accent-color: #0078d4;
+}
+
+/* Sort icon */
+.sort-icon {
+    margin-left: 4px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Table header */
+.table-header-cell {
+    border: 1px solid #3c3c3c;
+    padding: 12px 8px;
+    cursor: pointer;
+    user-select: none;
+    background-color: #252526;
+    color: #cccccc;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.table-header-cell-center {
+    text-align: center;
+}
+
+.table-header-cell-left {
+    text-align: left;
+}
+
+.table-header-checkbox {
+    border: 1px solid #3c3c3c;
+    padding: 12px 8px;
+    text-align: center;
+    background-color: #252526;
+    width: 50px;
+}
+
+.download-button {
+    padding: 8px 16px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.download-button-enabled {
+    background-color: #007acc;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 122, 204, 0.3);
+}
+
+.download-button-enabled:hover {
+    background-color: #005a9e;
+}
+
+.download-button-disabled {
+    background-color: #6e6e6e;
+    cursor: not-allowed;
+}
+
+/* Loading state */
+.loading-container {
+    text-align: center;
+    padding: 40px;
+}
+
+/* Table styling */
+.map-table {
+    border-collapse: collapse;
+    width: 100%;
+}

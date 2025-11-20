@@ -1,5 +1,6 @@
 // Pagination.tsx
 import React from "react";
+import '../../styles/map-pager.css';
 
 interface PaginationProps {
     page: number;

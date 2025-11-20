@@ -1,0 +1,39 @@
+/* Responsive layout for smaller screens */
+@media (max-width: 1200px) {
+    .map-browser {
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .map-list-container {
+        width: 100%;
+    }
+
+    .pud-renderer-wrapper {
+        width: 100%;
+        border-top: 1px solid #3c3c3c;
+        padding-top: 16px;
+    }
+}
+
+.map-browser {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    padding: 16px;
+}
+
+.map-list-container {
+    flex: 0 0 45%;
+    /* Fixed proportion on desktop - 45% for table */
+    min-width: 0;
+}
+
+.pud-renderer-wrapper {
+    flex: 0 0 55%;
+    /* Fixed proportion on desktop - 55% for preview */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}

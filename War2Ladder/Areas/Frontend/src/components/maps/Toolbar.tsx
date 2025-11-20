@@ -1,6 +1,6 @@
 // Toolbar.tsx
 import React from "react";
-
+import "../../styles/map-toolbar.css";
 interface ToolbarProps {
     filterText: string;
     onFilterChange: (value: string) => void;

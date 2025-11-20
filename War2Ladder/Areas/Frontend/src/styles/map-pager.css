@@ -1,0 +1,37 @@
+.table-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.table-pagination button {
+    background-color: #323130;
+    /* Neutral Dark */
+    color: #ffffff;
+    border: 1px solid #3b3a39;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.table-pagination button.active {
+    background-color: #0078d4;
+    /* Highlight current page */
+    font-weight: bold;
+}
+
+.table-pagination button:hover:not(:disabled) {
+    background-color: #484644;
+    /* Neutral Hover */
+}
+
+.table-pagination button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.table-pagination .ellipsis {
+    color: #c8c6c4;
+    padding: 6px;
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { MapList, PudMapItem } from "./MapList";
-import { fetchAndParsePud } from "./PudParser";
+import "../../styles/map-browser.css";
+import { MapList } from "./MapList";
+import { PudMapItem } from "./MapTypes";
 import PudRenderer from "./PudRenderer";
 
 export const MapBrowser: React.FC = () => {
@@ -30,7 +31,9 @@ export const MapBrowser: React.FC = () => {
         }
 
         try {
-            const pudArrayBuffer = await fetchAndParsePud(item.url);
+            // Fetch the PUD file directly - PudRenderer will handle parsing
+            const response = await fetch(item.url);
+            const pudArrayBuffer = await response.arrayBuffer();
 
             // Cache the result
             setPudCache(prev => new Map(prev).set(item.id, pudArrayBuffer));
@@ -42,28 +45,12 @@ export const MapBrowser: React.FC = () => {
         }
     };
 
-    return (
-        <div className="map-browser">
-            <div className="map-list-container">
-                <MapList onFocusMap={handleFocusMap} />
-            </div>
-            <div className="pud-renderer-container">
-                {pud ? (
-                    <PudRenderer pudArrayBuffer={pud} />
-                ) : (
-                    <div style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        height: '300px',
-                        color: '#cccccc',
-                        fontStyle: 'italic',
-                        textAlign: 'center'
-                    }}>
-                        Click a map in the table to show a preview
-                    </div>
-                )}
-            </div>
+    return <div className="map-browser">
+        <div className="map-list-container">
+            <MapList onFocusMap={handleFocusMap} />
         </div>
-    );
+        <div className="pud-renderer-wrapper">
+            <PudRenderer pudArrayBuffer={pud} />
+        </div>
+    </div>
 };
