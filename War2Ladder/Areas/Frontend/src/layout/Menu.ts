@@ -28,14 +28,6 @@ export const MENU: IMenuNodeProps[] = [
         ]
     },
     { id: 'forum', label: 'Forum', href: '#' },
-    {
-        id: 'maps',
-        label: 'Maps',
-        children: [
-            { id: 'map-browser', label: 'Map Browser', href: '#' },
-            { id: 'upload-map', label: 'Upload Map', href: '#' }
-        ]
-    },
     { id: '100prize', label: '$100 Prize Draw', href: '#' },
     { id: 'mystery-allies', label: 'Mystery Allies Tournament', href: '#' },
     { id: 'race-to-lust', label: 'Race to Lust Challenge', href: '#' }
