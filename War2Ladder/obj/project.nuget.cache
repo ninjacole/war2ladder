@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aV87hn/vHjs=",
+  "dgSpecHash": "SV87Js3Pg1E=",
   "success": true,
-  "projectFilePath": "c:\\projects\\War2Ladder\\War2Ladder\\War2Ladder.csproj",
+  "projectFilePath": "C:\\projects\\War2Ladder\\War2Ladder\\War2Ladder.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\matt\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\matt\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

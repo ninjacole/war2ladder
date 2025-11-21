@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\projects\\War2Ladder\\War2Ladder\\War2Ladder.csproj": {}
+    "C:\\projects\\War2Ladder\\War2Ladder\\War2Ladder.csproj": {}
   },
   "projects": {
-    "c:\\projects\\War2Ladder\\War2Ladder\\War2Ladder.csproj": {
+    "C:\\projects\\War2Ladder\\War2Ladder\\War2Ladder.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\projects\\War2Ladder\\War2Ladder\\War2Ladder.csproj",
+        "projectUniqueName": "C:\\projects\\War2Ladder\\War2Ladder\\War2Ladder.csproj",
         "projectName": "War2Ladder",
-        "projectPath": "c:\\projects\\War2Ladder\\War2Ladder\\War2Ladder.csproj",
+        "projectPath": "C:\\projects\\War2Ladder\\War2Ladder\\War2Ladder.csproj",
         "packagesPath": "C:\\Users\\matt\\.nuget\\packages\\",
-        "outputPath": "c:\\projects\\War2Ladder\\War2Ladder\\obj\\",
+        "outputPath": "C:\\projects\\War2Ladder\\War2Ladder\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

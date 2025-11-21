@@ -160,10 +160,15 @@ c:\projects\War2Ladder\War2Ladder\obj\Debug\net8.0\staticwebassets\msbuild.build
 c:\projects\War2Ladder\War2Ladder\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.War2Ladder.props
 c:\projects\War2Ladder\War2Ladder\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.War2Ladder.props
 c:\projects\War2Ladder\War2Ladder\obj\Debug\net8.0\staticwebassets.pack.json
-c:\projects\War2Ladder\War2Ladder\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 c:\projects\War2Ladder\War2Ladder\obj\Debug\net8.0\War2Ladder.csproj.Up2Date
 c:\projects\War2Ladder\War2Ladder\obj\Debug\net8.0\War2Ladder.dll
 c:\projects\War2Ladder\War2Ladder\obj\Debug\net8.0\refint\War2Ladder.dll
 c:\projects\War2Ladder\War2Ladder\obj\Debug\net8.0\War2Ladder.pdb
 c:\projects\War2Ladder\War2Ladder\obj\Debug\net8.0\War2Ladder.genruntimeconfig.cache
 c:\projects\War2Ladder\War2Ladder\obj\Debug\net8.0\ref\War2Ladder.dll
+C:\projects\War2Ladder\War2Ladder\bin\Debug\net8.0\Areas\Frontend\dist\maps\manifest.json
+C:\projects\War2Ladder\War2Ladder\bin\Debug\net8.0\Areas\Frontend\public\maps\manifest.json
+C:\projects\War2Ladder\War2Ladder\bin\Debug\net8.0\Areas\Frontend\tsconfig.json
+C:\projects\War2Ladder\War2Ladder\bin\Debug\net8.0\package-lock.json
+C:\projects\War2Ladder\War2Ladder\bin\Debug\net8.0\package.json
+C:\projects\War2Ladder\War2Ladder\obj\Debug\net8.0\War2Ladder.sourcelink.json

@@ -26,7 +26,7 @@ namespace War2Ladder.Areas.Database.Models
             {
                 options.AddPolicy("AllowFrontend",
                     builder => builder
-                        .WithOrigins("http://localhost:5173") // Vite default port
+                        .WithOrigins("http://localhost:5174") // Frontend Vite dev server
                         .AllowAnyHeader()
                         .AllowAnyMethod());
             });
