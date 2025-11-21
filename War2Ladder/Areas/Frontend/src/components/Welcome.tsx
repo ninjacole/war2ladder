@@ -1,9 +1,14 @@
 import '../styles/welcome.css';
 
 export const Welcome = () => {
-    return <div className='welcome-container'>
-        <p>The main purpose of this site is to enhance the enjoyment of Warcraft 2 for players and enthusiasts. Many Warcraft 2 maps can be found here by various authors, and the new Sharkfight 2025 season stats and info can be found here as well! In the future, we may have tournaments and events and so on.
-            Please note, this website is under construction and some places are still rubble and don’t look like anything yet. 🙂 Just imagine how great it will be when it’s done.</p>
-        <img className='blueorc-image' src='./static/blueorc.png' />
+    return <div>
+        <p>Welcome to War2Ladder!</p>
+        <p>This site is a work in progress. Currently you can browse / download maps from the maps menu on the left.</p>
+        <p>Upcoming features include:</p>
+        <ul>
+            <li>1v1 traditional ladder</li>
+            <li>Integrated user logins with blizzard</li>
+            <li>Tournaments and events</li>
+        </ul>
     </div>
 }

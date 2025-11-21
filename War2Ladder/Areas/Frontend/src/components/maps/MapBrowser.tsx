@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../../styles/map-browser.css";
+import "../../styles/maps/map-browser.css";
 import { MapList } from "./MapList";
 import { PudMapItem } from "./MapTypes";
 import PudRenderer from "./PudRenderer";

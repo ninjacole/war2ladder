@@ -1,4 +1,4 @@
-import '../../styles/map-selection-bar.css';
+import '../../styles/maps/map-selection-bar.css';
 
 interface IMapSelectionbarProps {
     selectionCount: number;

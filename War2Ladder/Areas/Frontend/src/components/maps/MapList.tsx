@@ -1,7 +1,7 @@
 import { saveAs } from "file-saver";
 import JSZip from "jszip";
 import { useEffect, useState } from "react";
-import '../../styles/map-list.css';
+import '../../styles/maps/map-list.css';
 import { SortDirection, SortField } from "../utils/Sorting";
 import MapSelectionBar from "./MapSelectionBar";
 import { PudMapItem } from "./MapTypes";

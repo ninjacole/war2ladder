@@ -30,6 +30,7 @@ const Layout = (props: ILayoutProps) => {
                         href={node.href}
                         children={node.children}
                         onClick={(id) => setSelected(id)}
+                        selected={node.id}
                     />
                 ))}
             </nav>
@@ -39,7 +40,7 @@ const Layout = (props: ILayoutProps) => {
             <header className="banner">
                 <div className="banner-content">
                     <h2></h2>
-                    <div className="logo">Warcraft 2 Sharkfights!</div>
+                    <div className="logo">Warcraft 2 Ladder</div>
                 </div>
             </header>
 

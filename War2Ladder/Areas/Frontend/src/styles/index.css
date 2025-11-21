@@ -45,11 +45,6 @@ a {
     margin-bottom: 0.5rem;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
-}
-
 button {
     cursor: pointer;
 }
@@ -99,6 +94,8 @@ body,
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+    list-style: none;
+    padding: 0;
 }
 
 /* top-level link */

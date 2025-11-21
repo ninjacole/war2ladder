@@ -6,7 +6,7 @@ export interface IMenuNodeProps {
     href?: string;
     children?: IMenuNodeProps[];
     onClick?: (id: string) => void;
-    selected: string;
+    selected?: string;
 };
 
 export const MenuNode: React.FC<IMenuNodeProps> = (props: IMenuNodeProps) => {

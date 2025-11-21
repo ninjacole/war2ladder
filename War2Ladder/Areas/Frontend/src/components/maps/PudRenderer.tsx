@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import '../../styles/pud-renderer.css';
+import '../../styles/maps/pud-renderer.css';
 import { MapColors } from './MapColors';
 import { PudData, PudParser } from './PudParser';
 
