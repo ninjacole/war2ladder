@@ -10,7 +10,6 @@ interface ILayoutProps {
 }
 
 const Layout = (props: ILayoutProps) => {
-    const { children } = props;
     const [selected, setSelected] = React.useState<string>('welcome');
 
     const Active = ComponentToMenuMap[selected] ?? (() => <div>Not found</div>);
